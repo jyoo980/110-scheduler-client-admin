@@ -37,6 +37,11 @@ public class ServerAPI : MonoBehaviour {
         StartCoroutine(SendScheduleGetRequest(uri, handleScheduleLoadFinished));
     }
 
+    public void GetAllSchedules(Action<ScheduleDto[]> handleSchedulesLoadFinished){
+        string uri = GenerateServerURI() + APIConstants.GET_ALL_SCHEDULES_API;
+        StartCoroutine(SendScheduleGetAllRequest(uri, handleSchedulesLoadFinished));
+    }
+
     public void GetScheduleTypes(Action<ScheduleTypesDto> handleScheduleTypeLoadFinished) {
         StartCoroutine(SendScheduleTypeGetRequest(GenerateServerURI() + APIConstants.GET_SCHEDULE_TYPES_API, handleScheduleTypeLoadFinished));
     }
@@ -83,6 +88,24 @@ public class ServerAPI : MonoBehaviour {
         bool retrievalSuccess = false;
         if (dto != null && dto.GetSchedulesByDay().Length == 7) {
             handleScheduleLoadFinished(dto);
+            retrievalSuccess = true;
+        }
+        HandleScheduleGetResponse(request, retrievalSuccess);
+    }
+
+    IEnumerator SendScheduleGetAllRequest(string uri, Action<ScheduleDto[]> handleSchedulesLoadFinished) {
+        UnityWebRequest request = new UnityWebRequest(uri, APIConstants.GET_METHOD);
+        request.downloadHandler = new DownloadHandlerBuffer();
+
+        SetRequestHeaders(request);
+
+        SetInfoText(APIConstants.LOADING_SCHED);
+        yield return request.SendWebRequest();
+        byte[] result = request.downloadHandler.data;
+        ScheduleDto[] dtos = JsonUtility.FromJson<ScheduleDto[]>(Encoding.UTF8.GetString(result));
+        bool retrievalSuccess = false;
+        if (dtos != null && dtos.Length > 0) {
+            handleSchedulesLoadFinished(dtos);
             retrievalSuccess = true;
         }
         HandleScheduleGetResponse(request, retrievalSuccess);

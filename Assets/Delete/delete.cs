@@ -13,6 +13,7 @@ public class delete : MonoBehaviour {
 	void Update () {
 		
 	}
+	
     public void addcontent() {
         RectTransform trans = GetComponent<RectTransform>();
         trans.localPosition = new Vector2(trans.localPosition.x, trans.localPosition.y+5);

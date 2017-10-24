@@ -9,6 +9,8 @@ public class APIConstants {
 
     //Request URIs
     public static string GET_SCHEDULE_API = "schedule/getSchedule/" + GET_SCHEDULE_PARAM_NAME + "/" + GET_SCHEDULE_PARAM_TYPE;
+    public static string GET_ALL_SCHEDULES_API = "schedule/getAllSchedules";
+
     public static string GET_SCHEDULE_TYPES_API = "schedule/getScheduleTypes";
     public static string SEND_SCHEDULE_API = "schedule/setSchedule";
     
