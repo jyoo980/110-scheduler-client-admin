@@ -24,8 +24,10 @@ public class APIConstants {
 
     //Loading text status updates
     public static string ERROR_DELETING_SCHEDULE = "Failed to delete selected schedule";
-    public static string LOADING_SCHED_TYPE = "Loading schedule types...";
-    public static string LOADING_SCHED = "Loading schedule...";
+    public static string LOADING_SCHED_TYPE = "Loading schedule types... please be patient" +
+		" - if you are the first person using this in a while, the server needs to warm up!";
+	public static string LOADING_SCHED = "Loading schedule... please be patient" +
+		" - if you are the first person using this in a while, the server needs to warm up!";
     public static string SENDING_SCHED = "Sending schedule...";
     public static string GENERAL_CONNECTION_ERROR = "Connection error - please confirm server URL is correct in settings";
     public static string SUCCESS_LOADING_SCHED = "Successfully retrieved schedule";

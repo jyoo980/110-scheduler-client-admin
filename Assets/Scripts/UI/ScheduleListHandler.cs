@@ -6,6 +6,8 @@ using System;
 public class ScheduleListHandler : MonoBehaviour {
 
     public ServerAPI serverAPI;
+	public WeekScheduler weekScheduler;
+	public Text text;
     public GameObject scheduleAnchor;
     public GameObject schedulePrefab;
 	public GameObject settingsPanel;
@@ -13,7 +15,7 @@ public class ScheduleListHandler : MonoBehaviour {
 
     public float originalVerticalSize = 320;
     private List<GameObject> scheduleList = new List<GameObject>();
-
+	private ScheduleDto[] scheduleDtos = null;
     private ScheduleDto selectedSchedule;
     public SelectedScheduleDisplayHelper selectedDisplayHelper;
 
@@ -25,7 +27,8 @@ public class ScheduleListHandler : MonoBehaviour {
         });
         //We add one here for esthetics, it's nice to have a bit of padding at the bottom of the list
         ResizeCanvas(inboundSchedules.Length + 1);
-        DestroySchedules();
+        DestroyOldSchedules();
+		scheduleDtos = inboundSchedules;
         GameObject previousSchedule = scheduleAnchor;
         foreach(ScheduleDto dto in inboundSchedules) {
             GameObject newSchedule = CreateNewScheduleObject(previousSchedule, dto);
@@ -33,6 +36,15 @@ public class ScheduleListHandler : MonoBehaviour {
             previousSchedule = newSchedule;
         }
     }
+
+	public void HandleDownloadSchedules(){
+		if (scheduleDtos == null || scheduleDtos.Length == 0) {
+			text.text = "There are no schedules to download! Please load them first";
+		} else {
+			string path = weekScheduler.GenerateAllWeeklySchedules (scheduleDtos);
+			text.text = "Saving complete! You can find your schedules in: " + path;
+		}
+	}
 
     public void AddSchedules(){
         serverAPI.GetAllSchedules(HandleAddedSchedules);
@@ -58,11 +70,12 @@ public class ScheduleListHandler : MonoBehaviour {
         trans.sizeDelta = new Vector2(trans.sizeDelta.x, desiredHeight);
 
     }
-    private void DestroySchedules() {
+    private void DestroyOldSchedules() {
         foreach (GameObject go in scheduleList) {
             Destroy(go);
         }
         scheduleList = new List<GameObject>();
+	    scheduleDtos = null;
     }
 
 	public void HandleSettingsButton(){
