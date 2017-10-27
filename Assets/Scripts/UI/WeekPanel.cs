@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScheduleDtoList : MonoBehaviour {
+public class WeekPanel : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

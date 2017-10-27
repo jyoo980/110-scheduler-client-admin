@@ -10,22 +10,22 @@ public class ScheduleDto : JsonEncodableData {
     [SerializeField]
     string[] schedulesByDay = null;
 
-    public ScheduleDto(string taName, string scheduleType, string[] schedule) {
+    public ScheduleDto(string taName, string scheduleType, string[] schedulesByDay) {
         this.taName = taName;
         this.scheduleType = scheduleType;
-        this.schedulesByDay = schedule;
+        this.schedulesByDay = schedulesByDay;
     }
 
-    public void SetSchedulesByDay(string[] schedule) {
-        this.schedulesByDay = schedule;
+    public void SetSchedulesByDay(string[] schedulesByDay) {
+        this.schedulesByDay = schedulesByDay;
     }
 
     public string[] GetSchedulesByDay() {
         return schedulesByDay;
     }
 
-    public void SetTaName(string name) {
-        this.taName = name;
+    public void SetTaName(string taName) {
+        this.taName = taName;
     }
 
     public string GetTaName() {

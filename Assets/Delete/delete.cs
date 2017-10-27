@@ -2,22 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
+using System;
+using System.Runtime.Serialization.Formatters.Binary;
+
 public class delete : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-	
-    public void addcontent() {
-        RectTransform trans = GetComponent<RectTransform>();
-        trans.localPosition = new Vector2(trans.localPosition.x, trans.localPosition.y+5);
-        //trans.sizeDelta = new Vector2(trans.sizeDelta.x, trans.sizeDelta.y + 5);
+    public Text text;
+    public void Click() {
+        Debug.Log(Application.dataPath);
+        text.text = Application.dataPath;
+        var file = File.CreateText(Application.dataPath + "/test.txt");
 
-    }
+        file.WriteLine("hoogaaaaa");
+        file.Close();
+            
+     }
 }

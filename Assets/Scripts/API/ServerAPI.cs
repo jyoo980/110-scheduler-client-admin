@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.Text;
 using UnityEngine.Networking;
 using System;
+using Newtonsoft.Json;
 
 public class ServerAPI : MonoBehaviour {
 
@@ -27,17 +28,14 @@ public class ServerAPI : MonoBehaviour {
     [SerializeField]
     private Color SuccessColor;
 
-    void Start() {
+   public void DeleteSchedule(string taName, string scheduleType, Action handleScheduleDeletedFinished) {
+        string uri = GenerateServerURI() + APIConstants.DELETE_SCHEDULE_API;
+        uri = uri.Replace(APIConstants.DELETE_SCHEDULE_PARAM_NAME, taName);
+        uri = uri.Replace(APIConstants.DELETE_SCHEDULE_PARAM_TYPE, scheduleType);
+        StartCoroutine(SendScheduleGetRequest(uri, handleScheduleDeletedFinished));
     }
 
-   public void GetSchedule(string taName, string scheduleType, Action<ScheduleDto> handleScheduleLoadFinished) {
-        string uri = GenerateServerURI() + APIConstants.GET_SCHEDULE_API;
-        uri = uri.Replace(APIConstants.GET_SCHEDULE_PARAM_NAME, taName);
-        uri = uri.Replace(APIConstants.GET_SCHEDULE_PARAM_TYPE, scheduleType);
-        StartCoroutine(SendScheduleGetRequest(uri, handleScheduleLoadFinished));
-    }
-
-    public void GetAllSchedules(Action<ScheduleDto[]> handleSchedulesLoadFinished){
+    public void GetAllSchedules(Action<ScheduleListDto> handleSchedulesLoadFinished){
         string uri = GenerateServerURI() + APIConstants.GET_ALL_SCHEDULES_API;
         StartCoroutine(SendScheduleGetAllRequest(uri, handleSchedulesLoadFinished));
     }
@@ -75,25 +73,23 @@ public class ServerAPI : MonoBehaviour {
         }
     }
 
-    IEnumerator SendScheduleGetRequest(string uri, Action<ScheduleDto> handleScheduleLoadFinished) {
-        UnityWebRequest request = new UnityWebRequest(uri, APIConstants.GET_METHOD);
+    IEnumerator SendScheduleGetRequest(string uri, Action handleScheduleDeletedFinished) {
+        UnityWebRequest request = new UnityWebRequest(uri, APIConstants.DELETE_METHOD);
         request.downloadHandler = new DownloadHandlerBuffer();
 
         SetRequestHeaders(request);
 
         SetInfoText(APIConstants.LOADING_SCHED);
         yield return request.SendWebRequest();
-        byte[] result = request.downloadHandler.data;
-        ScheduleDto dto = JsonUtility.FromJson<ScheduleDto>(Encoding.UTF8.GetString(result));
-        bool retrievalSuccess = false;
-        if (dto != null && dto.GetSchedulesByDay().Length == 7) {
-            handleScheduleLoadFinished(dto);
-            retrievalSuccess = true;
+        if (request.error != null) {
+            SetErrorText(APIConstants.ERROR_DELETING_SCHEDULE);
         }
-        HandleScheduleGetResponse(request, retrievalSuccess);
+        else {
+            handleScheduleDeletedFinished();
+        }
     }
 
-    IEnumerator SendScheduleGetAllRequest(string uri, Action<ScheduleDto[]> handleSchedulesLoadFinished) {
+    IEnumerator SendScheduleGetAllRequest(string uri, Action<ScheduleListDto> handleSchedulesLoadFinished) {
         UnityWebRequest request = new UnityWebRequest(uri, APIConstants.GET_METHOD);
         request.downloadHandler = new DownloadHandlerBuffer();
 
@@ -102,13 +98,30 @@ public class ServerAPI : MonoBehaviour {
         SetInfoText(APIConstants.LOADING_SCHED);
         yield return request.SendWebRequest();
         byte[] result = request.downloadHandler.data;
-        ScheduleDto[] dtos = JsonUtility.FromJson<ScheduleDto[]>(Encoding.UTF8.GetString(result));
+        ScheduleListDto dto = JsonConvert.DeserializeObject<ScheduleListDto>(Encoding.UTF8.GetString(result));
         bool retrievalSuccess = false;
-        if (dtos != null && dtos.Length > 0) {
-            handleSchedulesLoadFinished(dtos);
+        
+        if (dto != null && dto.GetSchedules().Length > 0) {
+            handleSchedulesLoadFinished(dto);
             retrievalSuccess = true;
         }
-        HandleScheduleGetResponse(request, retrievalSuccess);
+        HandleAllScheduleGetResponse(request, retrievalSuccess);
+    }
+
+    private void HandleAllScheduleGetResponse(UnityWebRequest request, bool retrievalSuccess)
+    {
+        if (request.error != null && request.error.ToLower().Contains("cannot resolve"))
+        {
+            SetErrorText(APIConstants.GENERAL_CONNECTION_ERROR);
+        }
+        else if (!retrievalSuccess)
+        {
+            SetErrorText(APIConstants.FAILURE_LOADING_SCHEDS);
+        }
+        else
+        {
+            SetSuccessText(APIConstants.SUCCESS_LOADING_SCHEDS);
+        }
     }
 
     private void HandleScheduleGetResponse(UnityWebRequest request, bool retrievalSuccess) {

@@ -13,6 +13,10 @@ public class WeekScheduler : MonoBehaviour {
     private const string PREFER_NOT = "Prefer Not ";
     private const string NEW_LINE = "\n";
 
+    public ScheduleListHandler listHandler;
+
+    public GameObject weekPanel;
+
     //Day strings
     private string[] HOURS_IN_DAY = new string[] {
         "8:00 ",
@@ -45,28 +49,17 @@ public class WeekScheduler : MonoBehaviour {
 
     private Dictionary<SelectionHandler.Selection, string> selectionDictionary;
 
-    [SerializeField]
-    private Dropdown targetSchedules;
-
-    [SerializeField]
-    private Text targetScheduleLabel;
-
-    [SerializeField]
-    private InputField firstNameField;
-
-    [SerializeField]
-    private InputField lastNameField;
-
-    [SerializeField]
-    private ServerAPI serverApi;
-
-    [SerializeField]
-    private Dropdown scheduleType;
-
     private void Awake () {
         LoadScheduleDictionary();
-        //LoadFirstAndLastName();
-        //HandleLoadScheduleTypes();
+    }
+
+    private void OnEnable() {
+        ScheduleDto selectedSchedule = listHandler.GetSelectedSchedule();
+        DistributeWeeklySchedule(selectedSchedule.GetSchedulesByDay());
+    }
+
+    public void HandleClosePanel() {
+        weekPanel.SetActive(false);
     }
 
     private void LoadScheduleDictionary() {
@@ -98,57 +91,10 @@ public class WeekScheduler : MonoBehaviour {
         return weeklySchedule;
     }
 
-    public void DistributeWeeklyScheduleFromServer(string[] abbreviatedSchedules) {
+    public void DistributeWeeklySchedule(string[] abbreviatedSchedules) {
         DayScheduler[] daySchedules = GetComponentsInChildren<DayScheduler>();
         for (int i = 0; i < daySchedules.Length; i++) {
             daySchedules[i].DistributeDailyScheduleFromServer(abbreviatedSchedules[i]);
         }
-    }
-
-    public void HandleLoadSchedule() {
-        serverApi.GetSchedule(GenerateTAName(), targetScheduleLabel.text.Trim().ToLower(), HandleScheduleLoadFinished);
-    }
-
-    public void HandleScheduleLoadFinished(ScheduleDto scheduleDto) {
-        DistributeWeeklyScheduleFromServer(scheduleDto.GetSchedulesByDay());
-    }
-
-    public void HandleLoadScheduleTypes() {
-        serverApi.GetScheduleTypes(HandleScheduleTypeLoadFinished);
-    }
-
-    public void HandleScheduleTypeLoadFinished(ScheduleTypesDto scheduleTypesDto) {
-        scheduleType.ClearOptions();
-        List<Dropdown.OptionData> options = new List<Dropdown.OptionData>();
-        string[] scheduleTypes = scheduleTypesDto.GetSchedulesTypes();
-        for (int i = 0; i < scheduleTypes.Length; i++) {
-            Dropdown.OptionData option = new Dropdown.OptionData();
-            option.text = scheduleTypes[i].First().ToString().ToUpper() + scheduleTypes[i].Substring(1);
-            options.Add(option);
-        }
-        scheduleType.AddOptions(options);
-    }
-
-    public void HandleSaveSchedule() {
-        SaveFirstAndLastName();
-        string[] weeklySchedule = GenerateAbbreviatedWeeklySchedule();
-        string taName = GenerateTAName();
-        string selectedScheduleType = targetScheduleLabel.text;
-        ScheduleDto scheduleDto = new ScheduleDto(taName, selectedScheduleType, weeklySchedule);
-        serverApi.SendSchedule(scheduleDto);
-    }
-
-    private string GenerateTAName() {
-        return firstNameField.text.Trim().ToLower() + "_" + lastNameField.text.Trim().ToLower();
-    }
-
-    private void SaveFirstAndLastName() {
-        PlayerPrefs.SetString("firstName", firstNameField.text);
-        PlayerPrefs.SetString("lastName", lastNameField.text);
-    }
-
-    private void LoadFirstAndLastName() {
-        firstNameField.text = PlayerPrefs.GetString("firstName");
-        lastNameField.text = PlayerPrefs.GetString("lastName");
     }
 }

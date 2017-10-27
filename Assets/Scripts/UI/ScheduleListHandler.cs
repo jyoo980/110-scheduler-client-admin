@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using System;
 public class ScheduleListHandler : MonoBehaviour {
 
     public ServerAPI serverAPI;
@@ -13,13 +14,21 @@ public class ScheduleListHandler : MonoBehaviour {
     public float originalVerticalSize = 320;
     private List<GameObject> scheduleList = new List<GameObject>();
 
-    public void HandleAddedSchedules(ScheduleDto[] inboundSchedules) {
+    private ScheduleDto selectedSchedule;
+    public SelectedScheduleDisplayHelper selectedDisplayHelper;
+
+
+    public void HandleAddedSchedules(ScheduleListDto inboundSchedulesDto) {
+        ScheduleDto[] inboundSchedules = inboundSchedulesDto.GetSchedules();
+        Array.Sort(inboundSchedules, (schedOne, schedTwo) => {
+            return schedOne.GetTaName().CompareTo(schedTwo.GetTaName());
+        });
         //We add one here for esthetics, it's nice to have a bit of padding at the bottom of the list
         ResizeCanvas(inboundSchedules.Length + 1);
         DestroySchedules();
         GameObject previousSchedule = scheduleAnchor;
         foreach(ScheduleDto dto in inboundSchedules) {
-            GameObject newSchedule = CreateNewScheduleObject(previousSchedule);
+            GameObject newSchedule = CreateNewScheduleObject(previousSchedule, dto);
             scheduleList.Add(newSchedule);
             previousSchedule = newSchedule;
         }
@@ -29,8 +38,9 @@ public class ScheduleListHandler : MonoBehaviour {
         serverAPI.GetAllSchedules(HandleAddedSchedules);
     }
 
-    private GameObject CreateNewScheduleObject(GameObject previousSchedule) {
+    private GameObject CreateNewScheduleObject(GameObject previousSchedule, ScheduleDto dto) {
         GameObject newSchedule = Instantiate(schedulePrefab, previousSchedule.GetComponent<RectTransform>().position, Quaternion.identity);
+        newSchedule.GetComponent<ScheduleButtonHelper>().SetupHelper(this, selectedDisplayHelper, dto);
         newSchedule.transform.SetParent(this.transform);
         newSchedule.transform.localScale = previousSchedule.transform.localScale;
         newSchedule.transform.localPosition = previousSchedule.transform.localPosition;
@@ -41,13 +51,12 @@ public class ScheduleListHandler : MonoBehaviour {
 
     //We need to make sure our scrollable list canvas is the correct size, and this is a function of the number
     // of elements of our list
-    private void ResizeCanvas(int numberOfElements){
+    private void ResizeCanvas(int numberOfElements) {
         RectTransform trans = GetComponent<RectTransform>();
         float curHeight = trans.rect.height;
         float desiredHeight = numberOfElements * verticalPadding;
-        if(curHeight < desiredHeight){
-            trans.sizeDelta = new Vector2(trans.sizeDelta.x, desiredHeight);
-        }
+        trans.sizeDelta = new Vector2(trans.sizeDelta.x, desiredHeight);
+
     }
     private void DestroySchedules() {
         foreach (GameObject go in scheduleList) {
@@ -59,4 +68,12 @@ public class ScheduleListHandler : MonoBehaviour {
 	public void HandleSettingsButton(){
 		settingsPanel.SetActive (true);
 	}
+
+    public void HandleSelectSchedule(ScheduleDto selectedSchedule) {
+        this.selectedSchedule = selectedSchedule;
+    }
+
+    public ScheduleDto GetSelectedSchedule() {
+        return selectedSchedule;
+    }
 }
