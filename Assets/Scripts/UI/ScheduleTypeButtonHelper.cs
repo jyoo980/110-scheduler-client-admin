@@ -25,4 +25,8 @@ public class ScheduleTypeButtonHelper : MonoBehaviour, ISelectHandler
 		Text typeField = GetComponentInChildren<Text>();
 		typeField.text = type;
 	}
+
+	public string GetMyScheduleType(){
+		return myScheduleType;
+	}
 }

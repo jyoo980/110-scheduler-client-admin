@@ -30,10 +30,25 @@ public class ServerAPI : MonoBehaviour {
 
    public void DeleteSchedule(string taName, string scheduleType, Action handleScheduleDeletedFinished) {
         string uri = GenerateServerURI() + APIConstants.DELETE_SCHEDULE_API;
-        uri = uri.Replace(APIConstants.DELETE_SCHEDULE_PARAM_NAME, taName);
-        uri = uri.Replace(APIConstants.DELETE_SCHEDULE_PARAM_TYPE, scheduleType);
-        StartCoroutine(SendScheduleGetRequest(uri, handleScheduleDeletedFinished));
+        uri = uri.Replace(APIConstants.SCHEDULE_PARAM_NAME, taName);
+        uri = uri.Replace(APIConstants.SCHEDULE_PARAM_TYPE, scheduleType);
+		StartCoroutine(SendScheduleDeleteRequest(uri, handleScheduleDeletedFinished, APIConstants.DELETING_SCHEDULE, 
+			APIConstants.ERROR_DELETING_SCHEDULE));
     }
+
+	public void DeleteScheduleType(string scheduleType, Action handleScheduleTypeDeletedFinished) {
+		string uri = GenerateServerURI() + APIConstants.DELETE_SCHEDULE_TYPE_API;
+		uri = uri.Replace(APIConstants.SCHEDULE_PARAM_TYPE, scheduleType);
+		StartCoroutine(SendScheduleDeleteRequest(uri, handleScheduleTypeDeletedFinished, APIConstants.DELETING_SCHEDULE_TYPE, 
+			APIConstants.ERROR_DELETING_SCHEDULE_TYPE));
+	}
+
+	public void AddScheduleType(string scheduleType, Action handleScheduleTypeAdded) {
+		string uri = GenerateServerURI() + APIConstants.ADD_SCHEDULE_TYPE_API;
+		uri = uri.Replace(APIConstants.SCHEDULE_PARAM_TYPE, scheduleType);
+		StartCoroutine(SendAddScheduleTypeRequest(uri, handleScheduleTypeAdded, APIConstants.ADDING_SCHEDULE, 
+			APIConstants.ERROR_ADDING_SCHEDULE));
+	}
 
     public void GetAllSchedules(Action<ScheduleListDto> handleSchedulesLoadFinished){
         string uri = GenerateServerURI() + APIConstants.GET_ALL_SCHEDULES_API;
@@ -74,21 +89,37 @@ public class ServerAPI : MonoBehaviour {
         }
     }
 
-    IEnumerator SendScheduleGetRequest(string uri, Action handleScheduleDeletedFinished) {
+	IEnumerator SendScheduleDeleteRequest(string uri, Action handleScheduleDeletedFinished, string loadingText, string errorText) {
         UnityWebRequest request = new UnityWebRequest(uri, APIConstants.DELETE_METHOD);
         request.downloadHandler = new DownloadHandlerBuffer();
 
         SetRequestHeaders(request);
 
-        SetInfoText(APIConstants.LOADING_SCHED);
+		SetInfoText(loadingText);
         yield return request.SendWebRequest();
         if (request.error != null) {
-            SetErrorText(APIConstants.ERROR_DELETING_SCHEDULE);
+			SetErrorText(errorText);
         }
         else {
             handleScheduleDeletedFinished();
         }
     }
+
+	IEnumerator SendAddScheduleTypeRequest(string uri, Action handleScheduleAddFinished, string loadingText, string errorText) {
+		UnityWebRequest request = new UnityWebRequest(uri, APIConstants.POST_METHOD);
+		request.downloadHandler = new DownloadHandlerBuffer();
+
+		SetRequestHeaders(request);
+
+		SetInfoText(loadingText);
+		yield return request.SendWebRequest();
+		if (request.error != null) {
+			SetErrorText(errorText);
+		}
+		else {
+			handleScheduleAddFinished();
+		}
+	}
 
     IEnumerator SendScheduleGetAllRequest(string uri, Action<ScheduleListDto> handleSchedulesLoadFinished) {
         UnityWebRequest request = new UnityWebRequest(uri, APIConstants.GET_METHOD);
@@ -125,7 +156,7 @@ public class ServerAPI : MonoBehaviour {
 			handleScheduleTypesLoadFinished(dto);
 			retrievalSuccess = true;
 		}
-		HandleAllScheduleGetResponse(request, retrievalSuccess);
+		HandleAllScheduleTypeGetResponse(request, retrievalSuccess);
 	}
 
     private void HandleAllScheduleGetResponse(UnityWebRequest request, bool retrievalSuccess)
@@ -143,6 +174,22 @@ public class ServerAPI : MonoBehaviour {
             SetSuccessText(APIConstants.SUCCESS_LOADING_SCHEDS);
         }
     }
+
+	private void HandleAllScheduleTypeGetResponse(UnityWebRequest request, bool retrievalSuccess)
+	{
+		if (request.error != null && request.error.ToLower().Contains("cannot resolve"))
+		{
+			SetErrorText(APIConstants.GENERAL_CONNECTION_ERROR);
+		}
+		else if (!retrievalSuccess)
+		{
+			SetErrorText(APIConstants.FAILURE_LOADING_SCHED_TYPES);
+		}
+		else
+		{
+			SetSuccessText(APIConstants.SUCCESS_LOADING_SCHED_TYPES);
+		}
+	}
 
     private void HandleScheduleGetResponse(UnityWebRequest request, bool retrievalSuccess) {
         if (request.error != null && request.error.ToLower().Contains("cannot resolve")) {

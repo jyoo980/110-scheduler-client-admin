@@ -3,13 +3,15 @@
 public class APIConstants {
 
     public static string NO_URL_WARNING = "No server URL detected! Please click 'Settings' and add URL provided by course coordinator.";
-    public static string DELETE_SCHEDULE_PARAM_NAME = "{taName}";
-    public static string DELETE_SCHEDULE_PARAM_TYPE = "{scheduleType}";
+    public static string SCHEDULE_PARAM_NAME = "{taName}";
+    public static string SCHEDULE_PARAM_TYPE = "{scheduleType}";
 
     //Request URIs
-    public static string DELETE_SCHEDULE_API = "schedule/deleteSchedule/" + DELETE_SCHEDULE_PARAM_NAME + "/" + DELETE_SCHEDULE_PARAM_TYPE;
+    public static string DELETE_SCHEDULE_API = "schedule/deleteSchedule/" + SCHEDULE_PARAM_NAME + "/" + SCHEDULE_PARAM_TYPE;
     public static string GET_ALL_SCHEDULES_API = "schedule/getAllSchedules";
 
+	public static string ADD_SCHEDULE_TYPE_API = "schedule/setScheduleType/" + SCHEDULE_PARAM_TYPE;
+	public static string DELETE_SCHEDULE_TYPE_API = "schedule/deleteScheduleType/" + SCHEDULE_PARAM_TYPE;
     public static string GET_SCHEDULE_TYPES_API = "schedule/getScheduleTypes";
     public static string SEND_SCHEDULE_API = "schedule/setSchedule";
     
@@ -24,6 +26,11 @@ public class APIConstants {
 
     //Loading text status updates
     public static string ERROR_DELETING_SCHEDULE = "Failed to delete selected schedule";
+	public static string ERROR_DELETING_SCHEDULE_TYPE = "Failed to delete selected schedule type";
+	public static string DELETING_SCHEDULE = "Deleting selected schedule...";
+	public static string DELETING_SCHEDULE_TYPE = "Deleting selected schedule type...";
+	public static string ADDING_SCHEDULE = "Adding selected schedule...";
+	public static string ERROR_ADDING_SCHEDULE = "Error adding selected schedule...";
     public static string LOADING_SCHED_TYPE = "Loading schedule types... please be patient" +
 		" - if you are the first person using this in a while, the server needs to warm up!";
 	public static string LOADING_SCHED = "Loading schedule... please be patient" +

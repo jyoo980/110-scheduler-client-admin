@@ -32,7 +32,7 @@ public class ScheduleTypeListHandler : MonoBehaviour {
 		}
 	}
 
-	public void AddSchedules(){
+	public void AddScheduleTypes(){
 		serverAPI.GetAllScheduleTypes(HandleAddedSchedules);
 	}
 
@@ -67,7 +67,19 @@ public class ScheduleTypeListHandler : MonoBehaviour {
 		this.selectedScheduleType = selectedScheduleType;
 	}
 
-	public string GetSelectedSchedule() {
+	public string GetSelectedScheduleType() {
 		return selectedScheduleType;
+	}
+
+	public bool DoesContainGivenScheduleType(string scheduleType){
+		foreach (GameObject go in scheduleTypeList) {
+			ScheduleTypeButtonHelper helper = go.GetComponent<ScheduleTypeButtonHelper> ();
+			if (helper != null) {
+				if (helper.GetMyScheduleType ().Trim ().ToLower ().Equals (scheduleType)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }

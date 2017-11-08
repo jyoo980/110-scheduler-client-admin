@@ -19,7 +19,7 @@ public class DeleteScheduleHelper : MonoBehaviour {
     public void CancelDelete() {
         gameObject.SetActive(false);
     }
-
+		
     public void ConfirmDelete() {
         serverApi.DeleteSchedule(selectedSchedule.GetTaName(), selectedSchedule.GetScheduleType(), listHandler.AddSchedules);
         selectedSchedule = null;
