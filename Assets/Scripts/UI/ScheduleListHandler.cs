@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.Linq;
 public class ScheduleListHandler : MonoBehaviour {
 
     public ServerAPI serverAPI;
+	public ScheduleTypeListHandler typeListHandler;
 	public WeekScheduler weekScheduler;
 	public Text text;
     public GameObject scheduleAnchor;
@@ -40,8 +42,11 @@ public class ScheduleListHandler : MonoBehaviour {
 	public void HandleDownloadSchedules(){
 		if (scheduleDtos == null || scheduleDtos.Length == 0) {
 			text.text = "There are no schedules to download! Please load them first";
+		} else if(typeListHandler.GetSelectedScheduleType() == null || typeListHandler.GetSelectedScheduleType().Length == 0){
+			text.text = "Please select a schedule type first";
 		} else {
-			string path = weekScheduler.GenerateAllWeeklySchedules (scheduleDtos);
+			string path = weekScheduler.GenerateAllWeeklySchedules (scheduleDtos.Where(sched => 
+				sched.GetScheduleType().Trim().ToLower().Equals(typeListHandler.GetSelectedScheduleType().Trim().ToLower())).ToArray());
 			text.text = "Saving complete! You can find your schedules in: " + path;
 		}
 	}

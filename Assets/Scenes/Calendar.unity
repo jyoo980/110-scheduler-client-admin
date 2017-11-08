@@ -24761,6 +24761,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serverAPI: {fileID: 1572903834}
+  typeListHandler: {fileID: 1559831547}
   weekScheduler: {fileID: 1201072790}
   text: {fileID: 1162362825}
   scheduleAnchor: {fileID: 1762578350}

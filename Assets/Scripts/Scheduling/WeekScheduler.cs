@@ -114,7 +114,8 @@ public class WeekScheduler : MonoBehaviour {
 			builder.Append (NEW_LINE);
 			builder.Append (NEW_LINE);
 		}
-		string path = Application.dataPath + "/ScheduleDump.text";
+		//string path = Application.dataPath + "/ScheduleDump.text";
+		string path = System.Environment.GetFolderPath (System.Environment.SpecialFolder.DesktopDirectory) + "/ScheduleDump.text";
 		File.WriteAllText (path, builder.ToString());
 		return path;
 	}
