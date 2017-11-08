@@ -26,35 +26,11 @@ public class DayScheduler : MonoBehaviour {
         abbreviationToSelection[preferNotAbbreviation] = SelectionHandler.Selection.PreferNot;
     }
 
-    public SelectionHandler.Selection[] GenerateDailySelections() {
-        TimeSelection[] timeSelections = GetComponentsInChildren<TimeSelection>();
-        SelectionHandler.Selection[] daySelections = new SelectionHandler.Selection[timeSelections.Length];
-        for (int i = 0; i < daySelections.Length; i++) {
-            daySelections[i] = timeSelections[i].GetTimeSlotSelection();
-        }
-        return daySelections;
-    }
-
-    public string GenerateDailySelectionByAbbreviation() {
-        TimeSelection[] timeSelections = GetComponentsInChildren<TimeSelection>();
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < timeSelections.Length; i++)
-        {
-            sb.Append(GetAbbreviatedTimeSlotSelection(timeSelections[i].GetTimeSlotSelection()));
-        }
-        return sb.ToString();
-    }
-
     public void DistributeDailyScheduleFromServer(string dailySchedule) {
         TimeSelection[] timeSelections = GetComponentsInChildren<TimeSelection>();
         char[] scheduleByHalfHour = dailySchedule.ToCharArray();
         for (int i = 0; i < scheduleByHalfHour.Length; i++) {
             timeSelections[i].SetTimeSlotSelection(abbreviationToSelection[scheduleByHalfHour[i].ToString()]);
         }
-    }
-
-    public string GetAbbreviatedTimeSlotSelection(SelectionHandler.Selection selection)
-    {
-        return selectionToAbbreviations[selection];
     }
 }

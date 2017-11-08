@@ -60,35 +60,6 @@ public class ServerAPI : MonoBehaviour {
 		StartCoroutine(SendScheduleGetAllTypesRequest(uri, handleSchedulesTypesLoadFinished));
 	}
 
-    public void SendSchedule(ScheduleDto newSchedule) {
-        StartCoroutine(SendPostRequest(GenerateServerURI() + APIConstants.SEND_SCHEDULE_API,  newSchedule.GenerateRequestBodyBytes()));
-    }
-
-    IEnumerator SendPostRequest(string uri, byte[] body) {
-        UnityWebRequest request = new UnityWebRequest(uri, APIConstants.POST_METHOD);
-        request.downloadHandler = new DownloadHandlerBuffer();
-
-        SetRequestHeaders(request);
-
-        if (body.Length != 0) {
-            request.uploadHandler = new UploadHandlerRaw(body);
-        }
-
-        SetInfoText(APIConstants.SENDING_SCHED);
-        yield return request.SendWebRequest();
-        HandleScheduleSendResponse(request);
-    }
-
-    private void HandleScheduleSendResponse(UnityWebRequest request)
-    {
-        if (request.error != null && request.error.ToLower().Contains("cannot resolve")) {
-            SetErrorText(APIConstants.GENERAL_CONNECTION_ERROR);
-        }
-        else {
-            SetSuccessText(APIConstants.SUCCESS_SENDING_SCHED);
-        }
-    }
-
 	IEnumerator SendScheduleDeleteRequest(string uri, Action handleScheduleDeletedFinished, string loadingText, string errorText) {
         UnityWebRequest request = new UnityWebRequest(uri, APIConstants.DELETE_METHOD);
         request.downloadHandler = new DownloadHandlerBuffer();
@@ -190,18 +161,6 @@ public class ServerAPI : MonoBehaviour {
 			SetSuccessText(APIConstants.SUCCESS_LOADING_SCHED_TYPES);
 		}
 	}
-
-    private void HandleScheduleGetResponse(UnityWebRequest request, bool retrievalSuccess) {
-        if (request.error != null && request.error.ToLower().Contains("cannot resolve")) {
-            SetErrorText(APIConstants.GENERAL_CONNECTION_ERROR);
-        }
-        else if(!retrievalSuccess) {
-            SetErrorText(APIConstants.FAILURE_LOADING_SCHED);
-        }
-        else {
-            SetSuccessText(APIConstants.SUCCESS_LOADING_SCHED);
-        }
-    }
 
     IEnumerator SendScheduleTypeGetRequest(string uri, Action<ScheduleTypesDto> handleScheduleTypeLoadFinished) {
         UnityWebRequest request = new UnityWebRequest(uri, APIConstants.GET_METHOD);

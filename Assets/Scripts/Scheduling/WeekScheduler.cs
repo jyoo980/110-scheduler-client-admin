@@ -114,20 +114,10 @@ public class WeekScheduler : MonoBehaviour {
 			builder.Append (NEW_LINE);
 			builder.Append (NEW_LINE);
 		}
-		//string path = Application.dataPath + "/ScheduleDump.text";
 		string path = System.Environment.GetFolderPath (System.Environment.SpecialFolder.DesktopDirectory) + "/ScheduleDump.text";
 		File.WriteAllText (path, builder.ToString());
 		return path;
 	}
-
-    public string[] GenerateAbbreviatedWeeklySchedule() {
-        DayScheduler[] daySchedules = GetComponentsInChildren<DayScheduler>();
-        string[] weeklySchedule = new string[7];
-        for (int i = 0; i < daySchedules.Length; i++){
-            weeklySchedule[i] = daySchedules[i].GenerateDailySelectionByAbbreviation();
-        }
-        return weeklySchedule;
-    }
 
     public void DistributeWeeklySchedule(string[] abbreviatedSchedules) {
         DayScheduler[] daySchedules = GetComponentsInChildren<DayScheduler>();
