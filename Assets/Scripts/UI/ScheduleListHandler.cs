@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.IO;
 using System.Linq;
 public class ScheduleListHandler : MonoBehaviour {
 
@@ -21,6 +22,15 @@ public class ScheduleListHandler : MonoBehaviour {
     private ScheduleDto selectedSchedule;
     public SelectedScheduleDisplayHelper selectedDisplayHelper;
 
+
+	void Awake(){
+		//Attempt to load URL from file so user doesn't have to manually enter
+		string path = System.Environment.CurrentDirectory + "/url.txt";
+		string url = File.ReadAllText (path);
+		if (url != null && url.Length > 0) {
+			PlayerPrefs.SetString(Settings.URL_KEY, url);
+		}
+	}
 
     public void HandleAddedSchedules(ScheduleListDto inboundSchedulesDto) {
         ScheduleDto[] inboundSchedules = inboundSchedulesDto.GetSchedules();
