@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeleteSchedulerTypeHelper : MonoBehaviour {
+public class DeleteScheduleTypeHelper : MonoBehaviour {
 
     private string selectedScheduleType;
     public ServerAPI serverApi;
-	public ScheduleTypeListHandler listHandler;
+	public ScheduleListHandler listHandler;
+	public ScheduleTypeListHandler listTypeHandler;
 	public SelectedScheduleTypeDisplayHelper displayHelper;
 
 	public void TogglePanel() {
-		selectedScheduleType = listHandler.GetSelectedScheduleType();
+		selectedScheduleType = listTypeHandler.GetSelectedScheduleType();
 		if (selectedScheduleType != null) {
 			gameObject.SetActive(true);
 		}
@@ -21,10 +22,15 @@ public class DeleteSchedulerTypeHelper : MonoBehaviour {
     }
 
     public void ConfirmDelete() {
-		serverApi.DeleteScheduleType(selectedScheduleType, listHandler.AddScheduleTypes);
+		serverApi.DeleteScheduleType(selectedScheduleType, RefreshSchedulesAndTypes);
 		selectedScheduleType = null;
-		listHandler.HandleSelectScheduleType(null);
+		listTypeHandler.HandleSelectScheduleType(null);
 		displayHelper.ClearType();
 		gameObject.SetActive(false);    
+	}
+
+	private void RefreshSchedulesAndTypes(){
+		listTypeHandler.AddScheduleTypes ();
+		listHandler.AddSchedules ();
 	}
 }
