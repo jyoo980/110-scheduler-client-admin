@@ -35,9 +35,14 @@ public class ScheduleListHandler : MonoBehaviour {
     public void HandleAddedSchedules(ScheduleListDto inboundSchedulesDto) {
         ScheduleDto[] inboundSchedules = inboundSchedulesDto.GetSchedules();
         Array.Sort(inboundSchedules, (schedOne, schedTwo) => {
-            int firstDate = Int32.Parse(schedOne.GetDate().Split(' ')[0].Replace("-", string.Empty));
-            int secondDate = Int32.Parse(schedTwo.GetDate().Split(' ')[0].Replace("-", string.Empty));
-            return firstDate.CompareTo(secondDate);
+            string[] firstDateTimePartition = schedOne.GetDate().Replace("/", string.Empty).Replace(":", string.Empty).Split(' ');
+            string firstDateString = firstDateTimePartition[0] + firstDateTimePartition[1];
+            string[] secondDateTimePartition = schedTwo.GetDate().Replace("/", string.Empty).Replace(":", string.Empty).Split(' ');
+            string secondDateString = secondDateTimePartition[0] + secondDateTimePartition[1];
+
+            Double firstDate = Double.Parse(firstDateString);
+            Double secondDate = Double.Parse(secondDateString);
+            return secondDate.CompareTo(firstDate);
         });
         //We add one here for esthetics, it's nice to have a bit of padding at the bottom of the list
         ResizeCanvas(inboundSchedules.Length + 1);
