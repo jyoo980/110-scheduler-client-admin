@@ -13,10 +13,11 @@ public class ScheduleButtonHelper : MonoBehaviour, ISelectHandler
     private string firstName;
     private string lastName;
     private string scheduleType;
+    private string date;
 
 	public void OnSelect(BaseEventData eventData) {
         listHandler.HandleSelectSchedule(mySchedule);
-        selectedDisplayHelper.SetupNameAndType(firstName, lastName, scheduleType);
+        selectedDisplayHelper.SetupNameAndType(firstName, lastName, date, scheduleType);
     }
 
     public void SetupHelper(ScheduleListHandler handler, SelectedScheduleDisplayHelper helper, ScheduleDto dto) {
@@ -27,8 +28,11 @@ public class ScheduleButtonHelper : MonoBehaviour, ISelectHandler
         string[] firstAndLast = dto.GetTaName().Split('_');
         firstName = firstAndLast[0].Substring(0, 1).ToUpper() + firstAndLast[0].Substring(1, firstAndLast[0].Length - 1);
         lastName = firstAndLast[1].Substring(0, 1).ToUpper() + firstAndLast[1].Substring(1, firstAndLast[1].Length - 1);
+        date = dto.GetDate();
         scheduleType = dto.GetScheduleType();
         textFields[0].text = firstName + " " + lastName;
-        textFields[1].text = scheduleType;
+        textFields[1].text = date.Split('.')[0];
+        textFields[2].text = scheduleType;
+
     }
 }

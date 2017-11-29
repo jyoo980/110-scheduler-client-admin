@@ -125,10 +125,10 @@ public class ServerAPI : MonoBehaviour {
 		bool retrievalSuccess = false;
 
 		if (dto != null && dto.GetSchedulesTypes().Length > 0) {
-			handleScheduleTypesLoadFinished(dto);
 			retrievalSuccess = true;
 		}
-		HandleAllScheduleTypeGetResponse(request, retrievalSuccess);
+        handleScheduleTypesLoadFinished(dto);
+        HandleAllScheduleTypeGetResponse(request, retrievalSuccess);
 	}
 
     private void HandleAllScheduleGetResponse(UnityWebRequest request, bool retrievalSuccess)
