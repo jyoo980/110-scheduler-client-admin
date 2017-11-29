@@ -105,9 +105,10 @@ public class ServerAPI : MonoBehaviour {
         bool retrievalSuccess = false;
         
         if (dto != null && dto.GetSchedules().Length > 0) {
-            handleSchedulesLoadFinished(dto);
             retrievalSuccess = true;
         }
+        
+        handleSchedulesLoadFinished(dto);
         HandleAllScheduleGetResponse(request, retrievalSuccess);
     }
 

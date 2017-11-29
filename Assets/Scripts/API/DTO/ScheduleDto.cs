@@ -7,12 +7,15 @@ public class ScheduleDto : JsonEncodableData {
     string taName = null;
     [SerializeField]
     string scheduleType = null;
+     [SerializeField]
+    string date = null;
     [SerializeField]
     string[] schedulesByDay = null;
 
-    public ScheduleDto(string taName, string scheduleType, string[] schedulesByDay) {
+    public ScheduleDto(string taName, string scheduleType, string date, string[] schedulesByDay) {
         this.taName = taName;
         this.scheduleType = scheduleType;
+        this.date = date;
         this.schedulesByDay = schedulesByDay;
     }
 
@@ -40,5 +43,13 @@ public class ScheduleDto : JsonEncodableData {
     public string GetScheduleType()
     {
         return scheduleType;
+    }
+
+    public void SetDate(string date){
+        this.date = date;
+    }
+
+    public string GetDate(){
+        return date;
     }
 }
