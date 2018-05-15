@@ -8,42 +8,72 @@ using System.Linq;
 public class ScheduleListHandler : MonoBehaviour {
 
     public ServerAPI serverAPI;
-	public ScheduleTypeListHandler typeListHandler;
-	public WeekScheduler weekScheduler;
-	public Text text;
+    public ScheduleTypeListHandler typeListHandler;
+    public WeekScheduler weekScheduler;
+    public Text text;
     public GameObject scheduleAnchor;
     public GameObject schedulePrefab;
-	public GameObject settingsPanel;
+    public GameObject settingsPanel;
     public float verticalPadding = 32;
 
     public float originalVerticalSize = 320;
     private List<GameObject> scheduleList = new List<GameObject>();
-	private ScheduleDto[] scheduleDtos = null;
+    private ScheduleDto[] scheduleDtos = null;
     private ScheduleDto selectedSchedule;
     public SelectedScheduleDisplayHelper selectedDisplayHelper;
+    public Text selectedScheduleType;
 
 
-	void Awake(){
-		//Attempt to load URL from file so user doesn't have to manually enter
-		string path = System.Environment.CurrentDirectory + "/url.txt";
-		string url = File.ReadAllText (path);
-		if (url != null && url.Length > 0) {
-			PlayerPrefs.SetString(Settings.URL_KEY, url);
-		}
-	}
+    void Awake() {
+        //Attempt to load URL from file so user doesn't have to manually enter
+        string path = System.Environment.CurrentDirectory + "/url.txt";
+        string url = File.ReadAllText(path);
+        if (url != null && url.Length > 0) {
+            PlayerPrefs.SetString(Settings.URL_KEY, url);
+        }
+    }
 
-    public void HandleAddedSchedules(ScheduleListDto inboundSchedulesDto) {
+    public void HandleAllAddedSchedules(ScheduleListDto inboundSchedulesDto) {
+        HandleAddedSchedules(inboundSchedulesDto, true);
+    }
+
+    public void HandleSelectedAddedSchedules(ScheduleListDto inboundSchedulesDto) {
+        HandleAddedSchedules(inboundSchedulesDto, false);
+    }
+
+    private void HandleAddedSchedules(ScheduleListDto inboundSchedulesDto, bool allSchedules) {
         ScheduleDto[] inboundSchedules = inboundSchedulesDto.GetSchedules();
         Array.Sort(inboundSchedules, (schedOne, schedTwo) => {
-            string[] firstDateTimePartition = schedOne.GetDate().Replace("/", string.Empty).Replace(":", string.Empty).Split(' ');
-            string firstDateString = firstDateTimePartition[0] + firstDateTimePartition[1];
-            string[] secondDateTimePartition = schedTwo.GetDate().Replace("/", string.Empty).Replace(":", string.Empty).Split(' ');
-            string secondDateString = secondDateTimePartition[0] + secondDateTimePartition[1];
+            try
+            {
+                string[] firstDateTimePartition = schedOne.GetDate().Replace("/", " ").Replace(":", " ").Split(' ');
+                int firstDateMonth = int.Parse(firstDateTimePartition[0]);
+                int firstDateDay = int.Parse(firstDateTimePartition[1]);
+                int firstDateYear = int.Parse(firstDateTimePartition[2]);
+                int firstDateHour = int.Parse(firstDateTimePartition[3]);
+                int firstDateMinute = int.Parse(firstDateTimePartition[4]);
+                int firstDateSecond = int.Parse(firstDateTimePartition[5]);
+                DateTime firstDate = new DateTime(firstDateYear, firstDateMonth, firstDateDay, firstDateHour, firstDateMinute, firstDateSecond);
+                string[] secondDateTimePartition = schedTwo.GetDate().Replace("/", " ").Replace(":", " ").Split(' ');
 
-            Double firstDate = Double.Parse(firstDateString);
-            Double secondDate = Double.Parse(secondDateString);
-            return secondDate.CompareTo(firstDate);
+                int secondDateMonth = int.Parse(secondDateTimePartition[0]);
+                int secondDateDay = int.Parse(secondDateTimePartition[1]);
+                int secondDateYear = int.Parse(secondDateTimePartition[2]);
+                int secondDateHour = int.Parse(secondDateTimePartition[3]);
+                int secondDateMinute = int.Parse(secondDateTimePartition[4]);
+                int secondDateSecond = int.Parse(secondDateTimePartition[5]);
+                DateTime secondDate = new DateTime(secondDateYear, secondDateMonth, secondDateDay, secondDateHour, secondDateMinute, secondDateSecond);
+                return secondDate.CompareTo(firstDate);
+            }
+            //It's possible one of the dates have foreign characters, so let's just return 0 here
+            catch (Exception e) {
+                return 0;
+            }
         });
+
+        if (!allSchedules) {
+            inboundSchedules = inboundSchedules.Where(schedule => schedule.GetScheduleType().Trim().ToLower().Equals(selectedScheduleType.text.Trim().ToLower())).ToArray();
+        }
         //We add one here for esthetics, it's nice to have a bit of padding at the bottom of the list
         ResizeCanvas(inboundSchedules.Length + 1);
         DestroyOldSchedules();
@@ -68,8 +98,12 @@ public class ScheduleListHandler : MonoBehaviour {
 		}
 	}
 
-    public void AddSchedules(){
-        serverAPI.GetAllSchedules(HandleAddedSchedules);
+    public void AddSchedules() {
+        serverAPI.GetAllSchedules(HandleAllAddedSchedules);
+    }
+
+    public void AddSelectedSchedules() {
+        serverAPI.GetAllSchedules(HandleSelectedAddedSchedules);
     }
 
     private GameObject CreateNewScheduleObject(GameObject previousSchedule, ScheduleDto dto) {
