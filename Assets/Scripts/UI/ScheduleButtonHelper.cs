@@ -14,6 +14,7 @@ public class ScheduleButtonHelper : MonoBehaviour, ISelectHandler
     private string lastName;
     private string scheduleType;
     private string date;
+    private const string EMPTY_NAME = "";
 
 	public void OnSelect(BaseEventData eventData) {
         listHandler.HandleSelectSchedule(mySchedule);
@@ -26,13 +27,30 @@ public class ScheduleButtonHelper : MonoBehaviour, ISelectHandler
         this.mySchedule = dto;
         Text[] textFields = GetComponentsInChildren<Text>();
         string[] firstAndLast = dto.GetTaName().Split('_');
-        firstName = firstAndLast[0].Substring(0, 1).ToUpper() + firstAndLast[0].Substring(1, firstAndLast[0].Length - 1);
-        lastName = firstAndLast[1].Substring(0, 1).ToUpper() + firstAndLast[1].Substring(1, firstAndLast[1].Length - 1);
+        handleFirstAndLastNames(firstAndLast);
         date = dto.GetDate();
         scheduleType = dto.GetScheduleType();
         textFields[0].text = firstName + " " + lastName;
         textFields[1].text = date.Split('.')[0];
         textFields[2].text = scheduleType;
+    }
 
+    private void handleFirstAndLastNames(string[] firstAndLastName)
+    {
+        string firstNameRaw = firstAndLastName[0];
+        string lastNameRaw = firstAndLastName[1];
+        if (firstNameRaw.Length == 0 || firstNameRaw.Equals("")){
+            firstName = EMPTY_NAME;
+        }
+        else{
+            firstName = firstNameRaw.Substring(0, 1).ToUpper() + firstNameRaw.Substring(1, firstNameRaw.Length - 1);
+        }
+        
+        if (lastNameRaw.Length == 0 || lastNameRaw.Equals("")){
+            lastName = EMPTY_NAME;
+        }
+        else{
+            lastName = lastNameRaw.Substring(0, 1).ToUpper() + lastNameRaw.Substring(1, lastNameRaw.Length - 1);
+        }
     }
 }

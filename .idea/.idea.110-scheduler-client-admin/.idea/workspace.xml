@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="01cada92-e4ab-40ee-aa00-4a3960379346" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Calendar.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Calendar.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Scheduling/WeekScheduler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Scheduling/WeekScheduler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/ScheduleButtonHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/ScheduleButtonHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="ScheduleButtonHelper.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/UI/ScheduleButtonHelper.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="30" column="29" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
+              <folding>
+                <marker date="1529874763473" expanded="false" signature="6:158" ph="..." />
+                <marker date="1529874763473" expanded="true" signature="225:2049" ph="{...}" />
+                <marker date="1529874763473" expanded="true" signature="581:731" ph="{...}" />
+                <marker date="1529874763473" expanded="true" signature="845:1357" ph="{...}" />
+                <marker date="1529874763473" expanded="true" signature="1426:2047" ph="{...}" />
+                <marker date="1529874763473" expanded="true" signature="1598:1645" ph="{...}" />
+                <marker date="1529874763473" expanded="true" signature="1645:1786" ph="{...}" />
+                <marker date="1529874763473" expanded="true" signature="1858:1904" ph="{...}" />
+                <marker date="1529874763473" expanded="true" signature="1904:2041" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WeekScheduler.cs" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/Scheduling/WeekScheduler.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="193">
+              <caret line="94" column="34" lean-forward="true" selection-start-line="94" selection-start-column="34" selection-end-line="94" selection-end-column="34" />
+              <folding>
+                <marker date="1529875075339" expanded="false" signature="6:129" ph="..." />
+                <marker date="1529875075339" expanded="true" signature="174:4356" ph="{...}" />
+                <marker date="1529875075339" expanded="true" signature="957:1440" ph="{...}" />
+                <marker date="1529875075339" expanded="true" signature="1530:1571" ph="{...}" />
+                <marker date="1529875075339" expanded="true" signature="1601:1754" ph="{...}" />
+                <marker date="1529875075339" expanded="true" signature="1791:1834" ph="{...}" />
+                <marker date="1529875075339" expanded="true" signature="1875:2121" ph="{...}" />
+                <marker date="1529875075339" expanded="true" signature="2192:3232" ph="{...}" />
+                <marker date="1529875075339" expanded="true" signature="2927:3151" ph="{...}" />
+                <marker date="1529875075339" expanded="true" signature="3007:3117" ph="{...}" />
+                <marker date="1529875075339" expanded="true" signature="3284:3547" ph="{...}" />
+                <marker date="1529875075339" expanded="true" signature="3350:3377" ph="{...}" />
+                <marker date="1529875075339" expanded="true" signature="3377:3544" ph="{...}" />
+                <marker date="1529875075339" expanded="true" signature="3618:4040" ph="{...}" />
+                <marker date="1529875075339" expanded="true" signature="3716:3850" ph="{...}" />
+                <marker date="1529875075339" expanded="true" signature="4114:4354" ph="{...}" />
+                <marker date="1529875075339" expanded="true" signature="4249:4348" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/ScheduleButtonHelper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/ExceptionHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Scheduling/WeekScheduler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7AECFBD6-0F05-4869-BE2C-A64C72D1CD46/1e/23d17985/LogType.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/ScheduleButtonHelper.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Scheduling/WeekScheduler.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/ExceptionHandler.cs" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="247" />
+    <option name="y" value="126" />
+    <option name="width" value="1789" />
+    <option name="height" value="1189" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="UnityExplorer" proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scratches" />
+      <pane id="SolutionExplorer">
+        <option name="show-file-system" value="false" />
+        <option name="show-all-items" value="false" />
+      </pane>
+      <pane id="UnityExplorer">
+        <subPane>
+          <expand>
+            <path>
+              <item name="" type="ad4990d8:FileSystemViewPaneBase$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="110-scheduler-client-admin" type="483dac07:UnityExplorerNode$Root" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+        <option name="show-hidden-items" value="false" />
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Attach Unity.Unity">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+    </configuration>
+    <configuration name="Unity" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" pid="12816">
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" value="12816" />
+    </configuration>
+    <list>
+      <item itemvalue="Attach Unity.Unity" />
+      <item itemvalue="Attach Unity.Attach to Unity Editor" />
+    </list>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="01cada92-e4ab-40ee-aa00-4a3960379346" name="Default" comment="" />
+      <created>1529874340533</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1529874340533</updated>
+      <workItem from="1529874344963" duration="2530000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="2530000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="247" y="126" width="1789" height="1189" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Errors In Solution" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Unit Tests" />
+      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="NuGet" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24985541" />
+      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Unity" />
+      <window_info anchor="right" id="Database" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3996194" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+    </layout>
+  </component>
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Scheduling/WeekScheduler.cs</url>
+          <line>84</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Scheduling/WeekScheduler.cs" initialLine="84">
+            <startOffsets>
+              <startOffset value="2505" />
+            </startOffsets>
+            <endOffsets>
+              <endOffset value="2527" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="3" />
+    </breakpoint-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="setValue">
+      <expression>
+        <expression-string>&quot;&quot;</expression-string>
+        <language-id>C#</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>throw new Exception()</expression-string>
+        <language-id>C#</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/UI/ScheduleButtonHelper.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="30" column="29" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
+          <folding>
+            <marker date="1529874763473" expanded="false" signature="6:158" ph="..." />
+            <marker date="1529874763473" expanded="true" signature="225:2049" ph="{...}" />
+            <marker date="1529874763473" expanded="true" signature="581:731" ph="{...}" />
+            <marker date="1529874763473" expanded="true" signature="845:1357" ph="{...}" />
+            <marker date="1529874763473" expanded="true" signature="1426:2047" ph="{...}" />
+            <marker date="1529874763473" expanded="true" signature="1598:1645" ph="{...}" />
+            <marker date="1529874763473" expanded="true" signature="1645:1786" ph="{...}" />
+            <marker date="1529874763473" expanded="true" signature="1858:1904" ph="{...}" />
+            <marker date="1529874763473" expanded="true" signature="1904:2041" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7AECFBD6-0F05-4869-BE2C-A64C72D1CD46/1e/23d17985/LogType.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="14" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/ExceptionHandler.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="21" lean-forward="true" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
+          <folding>
+            <marker date="1529875905854" expanded="true" signature="6:100" ph="..." />
+            <marker date="1529875905854" expanded="true" signature="147:593" ph="{...}" />
+            <marker date="1529875905854" expanded="true" signature="234:289" ph="{...}" />
+            <marker date="1529875905854" expanded="true" signature="359:516" ph="{...}" />
+            <marker date="1529875905854" expanded="true" signature="430:513" ph="{...}" />
+            <marker date="1529875905854" expanded="true" signature="535:590" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Scheduling/WeekScheduler.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="94" column="34" lean-forward="true" selection-start-line="94" selection-start-column="34" selection-end-line="94" selection-end-column="34" />
+          <folding>
+            <marker date="1529875075339" expanded="false" signature="6:129" ph="..." />
+            <marker date="1529875075339" expanded="true" signature="174:4356" ph="{...}" />
+            <marker date="1529875075339" expanded="true" signature="957:1440" ph="{...}" />
+            <marker date="1529875075339" expanded="true" signature="1530:1571" ph="{...}" />
+            <marker date="1529875075339" expanded="true" signature="1601:1754" ph="{...}" />
+            <marker date="1529875075339" expanded="true" signature="1791:1834" ph="{...}" />
+            <marker date="1529875075339" expanded="true" signature="1875:2121" ph="{...}" />
+            <marker date="1529875075339" expanded="true" signature="2192:3232" ph="{...}" />
+            <marker date="1529875075339" expanded="true" signature="2927:3151" ph="{...}" />
+            <marker date="1529875075339" expanded="true" signature="3007:3117" ph="{...}" />
+            <marker date="1529875075339" expanded="true" signature="3284:3547" ph="{...}" />
+            <marker date="1529875075339" expanded="true" signature="3350:3377" ph="{...}" />
+            <marker date="1529875075339" expanded="true" signature="3377:3544" ph="{...}" />
+            <marker date="1529875075339" expanded="true" signature="3618:4040" ph="{...}" />
+            <marker date="1529875075339" expanded="true" signature="3716:3850" ph="{...}" />
+            <marker date="1529875075339" expanded="true" signature="4114:4354" ph="{...}" />
+            <marker date="1529875075339" expanded="true" signature="4249:4348" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

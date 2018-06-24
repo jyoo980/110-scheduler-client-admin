@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Andrew\.Rider2018.1\system\resharper-host\local\Transient\ReSharperHost\v12\SolutionCaches\_110-scheduler-client-admin.-1873256038.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Andrew\Desktop\110-scheduler-client-admin" t="IncludeRecursive">
+      <e p="110-scheduler-client-admin.sln" t="IncludeFlat" />
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Scripts" t="Include">
+          <e p="API" t="Include">
+            <e p="APIConstants.cs" t="Include" />
+            <e p="DTO" t="Include">
+              <e p="JsonEncodableData.cs" t="Include" />
+              <e p="ScheduleDto.cs" t="Include" />
+              <e p="ScheduleListDto.cs" t="Include" />
+              <e p="ScheduleTypesDto.cs" t="Include" />
+            </e>
+            <e p="ServerAPI.cs" t="Include" />
+          </e>
+          <e p="ExceptionHandler.cs" t="Include" />
+          <e p="Scheduling" t="Include">
+            <e p="DayScheduler.cs" t="Include" />
+            <e p="WeekScheduler.cs" t="Include" />
+          </e>
+          <e p="Settings.cs" t="Include" />
+          <e p="UI" t="Include">
+            <e p="AddScheduleHelper.cs" t="Include" />
+            <e p="DeleteScheduleHelper.cs" t="Include" />
+            <e p="DeleteScheduleTypeHelper.cs" t="Include" />
+            <e p="ScheduleButtonHelper.cs" t="Include" />
+            <e p="ScheduleListHandler.cs" t="Include" />
+            <e p="ScheduleTypeButtonHelper.cs" t="Include" />
+            <e p="ScheduleTypeListHandler.cs" t="Include" />
+            <e p="SelectedScheduleDisplayHelper.cs" t="Include" />
+            <e p="SelectedScheduleTypeDisplayHelper.cs" t="Include" />
+            <e p="SelectionHandler.cs" t="Include" />
+            <e p="TimeSelection.cs" t="Include" />
+            <e p="ViewSelectedHelper.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="Library" t="ExcludeRecursive" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Temp" t="ExcludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+      </e>
+    </e>
+  </component>
+</project>

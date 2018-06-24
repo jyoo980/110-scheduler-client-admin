@@ -19,6 +19,7 @@ public class WeekScheduler : MonoBehaviour {
 	private const string NOT_AVAILABLE_ABBREVIATED = "n";
 	private const string PREFER_NOT_ABBREVIATED = "p";
     public ScheduleListHandler listHandler;
+	private const string EMPTY_NAME = "";
 
     public GameObject weekPanel;
 
@@ -80,10 +81,8 @@ public class WeekScheduler : MonoBehaviour {
 		string[] nameArray = scheduleDto.GetTaName ().Split ('_');
 		string unformattedFirst = nameArray [0].Trim ();
 		string unformattedLast = nameArray [1].Trim ();
-		string formattedFirst = unformattedFirst.Trim ().Substring (0, 1).ToUpper () +
-			(unformattedFirst.Length > 1 ? unformattedFirst.Trim().Substring(1, unformattedFirst.Length - 1) : ""); 
-		string formattedLast = unformattedLast.Trim ().Substring (0, 1).ToUpper () +
-			(unformattedLast.Length > 1 ? unformattedLast.Trim().Substring(1, unformattedLast.Length - 1) : "");         
+		string formattedFirst = formatName(unformattedFirst);
+		string formattedLast = formatName(unformattedLast);     
 		StringBuilder builder = new StringBuilder();
 		builder.Append ("(");
 		builder.Append(formattedFirst + formattedLast);
@@ -105,7 +104,17 @@ public class WeekScheduler : MonoBehaviour {
 		builder.Append ("\"");
 		builder.Append (")");
 		return builder.ToString();
-	} 
+	}
+
+	private string formatName(string unformattedName){
+		if (unformattedName.Length == 0 || unformattedName.Equals("")){
+			return EMPTY_NAME;
+		}
+		else{
+			return unformattedName.Substring (0, 1).ToUpper () +
+				(unformattedName.Length > 1 ? unformattedName.Substring(1, unformattedName.Length - 1) : ""); 
+		}
+	}
 
 	public string GenerateAllWeeklySchedules(ScheduleDto[] allSchedules){
 		StringBuilder builder = new StringBuilder ();
