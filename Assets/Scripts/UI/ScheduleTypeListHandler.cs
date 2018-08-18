@@ -17,7 +17,8 @@ public class ScheduleTypeListHandler : MonoBehaviour
 	private List<GameObject> scheduleTypeList = new List<GameObject>();
 	private string selectedScheduleType;
 
-	public void HandleAddedSchedules(ScheduleTypesDto inboundScheduleTypes) {
+	public void HandleAddedSchedules(ScheduleTypesDto inboundScheduleTypes) 
+	{
 		string[] inboundSchedules = inboundScheduleTypes.GetSchedulesTypes();
 		ResetCanvas(inboundSchedules);
 		GameObject previousSchedule = scheduleTypeAnchor;

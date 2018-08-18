@@ -16,12 +16,14 @@ public class ScheduleButtonHelper : MonoBehaviour, ISelectHandler
     private string date;
     private const string EMPTY_NAME = "";
 
-	public void OnSelect(BaseEventData eventData) {
+	public void OnSelect(BaseEventData eventData) 
+    {
         listHandler.HandleSelectSchedule(mySchedule);
         selectedDisplayHelper.SetupNameAndType(firstName, lastName, date, scheduleType);
     }
 
-    public void SetupHelper(ScheduleListHandler handler, SelectedScheduleDisplayHelper helper, ScheduleDto dto) {
+    public void SetupHelper(ScheduleListHandler handler, SelectedScheduleDisplayHelper helper, ScheduleDto dto) 
+    {
         this.selectedDisplayHelper = helper;
         this.listHandler = handler;
         this.mySchedule = dto;
@@ -35,22 +37,25 @@ public class ScheduleButtonHelper : MonoBehaviour, ISelectHandler
         textFields[2].text = scheduleType;
     }
 
-    private void handleFirstAndLastNames(string[] firstAndLastName)
+    private void handleFirstAndLastNames(string[] fullName)
     {
-        string firstNameRaw = firstAndLastName[0];
-        string lastNameRaw = firstAndLastName[1];
-        if (firstNameRaw.Length == 0 || firstNameRaw.Equals("")){
-            firstName = EMPTY_NAME;
-        }
-        else{
-            firstName = firstNameRaw.Substring(0, 1).ToUpper() + firstNameRaw.Substring(1, firstNameRaw.Length - 1);
-        }
-        
-        if (lastNameRaw.Length == 0 || lastNameRaw.Equals("")){
-            lastName = EMPTY_NAME;
-        }
-        else{
-            lastName = lastNameRaw.Substring(0, 1).ToUpper() + lastNameRaw.Substring(1, lastNameRaw.Length - 1);
-        }
+        var firstNameRaw = fullName[0];
+        var lastNameRaw = fullName[1];
+        setFirstName(firstNameRaw);
+        setLastName(lastNameRaw);
+    }
+
+    private void setFirstName(string firstName)
+    {
+        this.firstName = (String.IsNullOrEmpty(firstName))
+            ? EMPTY_NAME
+            : firstName.Substring(0, 1).ToUpper() + firstName.Substring(1, firstName.Length - 1);
+    }
+
+    private void setLastName(string lastName)
+    {
+        this.lastName = (String.IsNullOrEmpty(lastName))
+            ? EMPTY_NAME
+            : lastName = lastName.Substring(0, 1).ToUpper() + lastName.Substring(1, lastName.Length - 1);
     }
 }
